@@ -1,4 +1,4 @@
-///reference types="cypress" />
+/// <reference types="cypress" />
 var faker = require('faker');
 
 describe('Funcionalidade Pre Cadastro', () => {
@@ -25,6 +25,12 @@ describe('Funcionalidade Pre Cadastro', () => {
         cy.get('#account_last_name').type(sobrenomeFaker)
         cy.get('.woocommerce-Button').click()
 
+        cy.get('.woocommerce-message').should('contain', 'Detalhes da conta modificados com sucesso')
+    });
+
+    it('Deve completar o pré-cadastro com sucesso usando Comandos customizados', () => {
+        let emailFaker2 = faker.internet.email()
+        cy.preCadastro(emailFaker2, 'senha!@#forte', 'Miliane', 'Madeira')
         cy.get('.woocommerce-message').should('contain', 'Detalhes da conta modificados com sucesso')
     });
 });
